@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>НМТ English: 60-minute sample test</title>
+<style>
+:root{--bg:#fff;--surf:#fff;--ink:#16213b;--mute:#58627a;--line:#f3d2de;--blue:#b03a63;--yel:#f7c6d6;--tint:#fff6f9;--ok:#1b7a43;--okbg:#e2f4ea;--bad:#b3261e;--badbg:#fbe7e5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 Georgia,"Times New Roman",serif}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surf);border-bottom:3px solid var(--yel);display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 16px;flex-wrap:wrap}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surf);z-index:10}
+h1{font-size:1.05rem;margin:0}
+#timer{font:700 1.5rem/1 ui-monospace,Menlo,monospace;color:var(--blue)}
+#timer.low{color:var(--bad)}
+nav{display:flex;gap:4px;max-width:880px;margin:14px auto 0;padding:0 16px}
+nav button{font:inherit;font-size:.95rem;padding:8px 14px;border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:6px 6px 0 0;cursor:pointer}
+nav button[aria-selected=true]{background:var(--blue);color:#fff;border-color:var(--blue)}
+nav button:disabled{opacity:.5;cursor:not-allowed}
+main{max-width:880px;margin:0 auto;padding:16px}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surf);border:1px solid var(--line);border-left:5px solid var(--yel);border-radius:4px;padding:16px 18px;margin:0 0 14px}
+.card h3{margin:0 0 6px;font-size:1rem;color:var(--mute);font-weight:400}
+.card p{margin:.3em 0 .7em}
+.passage{background:var(--tint);border:2px solid var(--yel);padding:14px 18px;margin:20px 0 14px;border-radius:4px}
+label.o{display:block;padding:7px 10px;margin:4px 0;border:1px solid var(--line);border-radius:4px;cursor:pointer}
+label.o:hover{border-color:var(--blue)}
+label.o input{margin-right:8px}
+.sel{background:color-mix(in srgb,var(--yel) 25%,transparent);border-color:var(--yel)}
+.nav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.nav a{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surf);color:var(--ink);text-decoration:none;border-radius:4px;font:600 .85rem ui-monospace,monospace}
+.nav a.done{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn{font:inherit;font-weight:700;padding:11px 22px;border:0;border-radius:4px;background:var(--yel);color:#16213b;cursor:pointer}
+.btn.alt{background:var(--surf);color:var(--ink);border:1px solid var(--line)}
+.score{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 16px}
+.score div{flex:1 1 160px;background:var(--surf);border:1px solid var(--line);padding:12px 14px;border-radius:4px}
+.score b{font-size:1.6rem;display:block;color:var(--blue)}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--ok)}
+.rv{border-left-color:var(--ok)}.rv.wrong{border-left-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;padding:1px 9px;border-radius:10px;background:var(--line);margin-right:6px}
+.yours{padding:6px 10px;border-radius:4px;margin:4px 0}.yours.g{background:var(--okbg);color:var(--ok)}.yours.b{background:var(--badbg);color:var(--bad)}
+.exp{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+input.t{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:min(260px,100%)}
+table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;font-size:.95rem}
+.scroll{overflow-x:auto}
+.fb{font-size:.9rem;margin-left:8px}
+.big{font:700 2.4rem/1.2 ui-monospace,Menlo,monospace;color:var(--blue);margin:6px 0}
+.ph.on{background:var(--tint);border-color:var(--yel);border-left-color:var(--blue)}
+select{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+</style>
+</head>
+<body>
+<header>
+  <h1>НМТ English: sample test</h1>
+  <span id="timer" aria-live="off">60:00</span>
+</header>
+<nav role="tablist">
+  <button role="tab" id="ts" aria-selected="true" data-t="speak">1. Speaking (5 min)</button>
+  <button role="tab" data-t="test">2. Test (60 min)</button>
+  <button role="tab" id="tr" data-t="review" disabled>3. Explanations</button>
+  <button role="tab" id="th" data-t="hw" disabled>4. Homework &amp; analysis</button>
+</nav>
+<main>
+<section id="test" class="panel">
+  <p>32 questions, 60 minutes, one correct answer each. The structure copies the real НМТ foreign-language test (32 tasks). The questions are original practice items, not the official ones: for released real tasks use the online tests at <a href="https://osvita.ua/test/">osvita.ua</a> or the УЦОЯО demo. The timer starts with your first answer or the Start button. Explanations and homework unlock after you finish.</p>
+  <button class="btn" id="start">Start the timer</button>
+  <div class="nav" id="qnav" style="margin-top:16px"></div>
+  <div id="qs"></div>
+  <button class="btn" id="finish">Finish and see results</button>
+</section>
+<section id="speak" class="panel on">
+  <div class="card"><h3>Speaking, 5 minutes (extra practice: the real НМТ has no speaking part)</h3>
+  <p>Work with a partner or record yourself on your phone. The parts change automatically.</p>
+  <div class="big" id="stime">5:00</div><button class="btn" id="sgo">Start speaking</button></div>
+  <div class="card ph" id="ph1"><b>Part 1 (1 min): warm-up</b><p>Tell me about yourself: where you live and what you study. What do you do in your free time? Which school subject is your favourite, and why?</p></div>
+  <div class="card ph" id="ph2"><b>Part 2 (2 min): monologue</b><p>Talk about a place in Ukraine you would recommend to a foreign friend. Say where it is, what people can do there, why you like it, and when the best time to go is.</p></div>
+  <div class="card ph" id="ph3"><b>Part 3 (2 min): discussion</b><p>“Teenagers should have a limit on screen time.” Give your opinion, one argument for, one against, and an example. Useful: <i>In my opinion…, On the other hand…, For instance…, That is why…</i></p></div>
+  <div class="card"><h3>Self-check (1 = weak, 5 = strong)</h3><div id="rate"></div><p><button class="btn" id="ssave">Save and go to the test</button></p></div>
+</section>
+<section id="review" class="panel"></section>
+<section id="hw" class="panel"></section>
+</main>
+<script>
+const P2="Maria's grandfather kept bees for forty years. When she was ten, he let her wear his old protective hat and stand close to the hives. At first she was terrified, but he taught her to move slowly and stay calm. Last year, after he retired, Maria took over the apiary. She sells honey at a weekend market and has started a blog about bee care. Her grandfather still visits every Sunday, although he says he is only there to taste the honey, not to give advice.";
+const P="When the village of Verkhnie opened its library after dark last summer, nobody expected a crowd. The idea came from librarian Olena, who noticed that farmers and shop workers rarely visited during the day because they were busy until six. Now, from seven to midnight, the building is full of people reading, studying and even playing chess. Olena says the late hours have changed the library's image: it used to be a quiet place for schoolchildren, and now it is a meeting point for everyone. However, not everybody is happy. A few neighbours complain about the lights and the voices outside, and the council has promised to review the project in September.";
+// [category, topic, question, options, correct index, explanation]
+const Q=[
+["Grammar","Third conditional","If I ___ more time yesterday, I would have finished the project.",["had had","have had","would have","having"],0,"The result clause is 'would have finished', so this is the third conditional (an unreal past). The pattern is: <b>If + past perfect, would have + past participle</b>. 'Had had' = past perfect of 'have'. B (present perfect) and C (would in the if-clause) are not used in this structure."],
+["Grammar","Future perfect passive","The bridge ___ by the end of next year.",["completes","will have been completed","is completing","has completed"],1,"'By the end of next year' points to an action finished before a future time, so we need the <b>future perfect</b>. The bridge does not complete itself, so it is passive: <b>will have been + past participle</b>."],
+["Grammar","Reported questions","She asked me where ___.",["did I live","I lived","do I live","I live"],1,"In reported (indirect) questions we use <b>statement word order</b>, with no do/did. Because 'asked' is in the past, the tense shifts back: 'Where do you live?' becomes 'where I lived'. A and C keep question order, which is wrong."],
+["Grammar","Articles","I saw ___ unusual bird in ___ garden this morning.",["an / the","a / the","an / a","the / the"],0,"'Unusual' begins with a vowel <i>sound</i>, so the first gap needs <b>an</b>. The bird is mentioned for the first time (indefinite). 'The garden' is the one both speakers know (definite). B ignores the vowel sound."],
+["Grammar","Verb + gerund","He suggested ___ a taxi because it was raining.",["to take","taking","take","took"],1,"<b>Suggest</b> is followed by the -ing form (or by 'that + should/subjunctive'). Learn the group: suggest, avoid, enjoy, mind, deny, consider, finish + -ing. 'To take' after suggest is a very common error."],
+["Grammar","Dependent prepositions","She is very good ___ solving logic puzzles.",["in","at","on","for"],1,"Fixed phrase: <b>good at</b> something (a skill). Compare: interested in, afraid of, keen on, responsible for. Prepositions after adjectives must be memorised as pairs."],
+["Grammar","Modal perfect","You ___ have told me earlier; I would have helped.",["should","must","can","need"],0,"'Should have + past participle' expresses <b>criticism or regret about the past</b>: it would have been better to tell me. 'Must have told' is a logical deduction and does not fit the meaning."],
+["Grammar","Relative clauses","The woman ___ daughter won the contest is my neighbour.",["who","which","whose","whom"],2,"We need a word showing <b>possession</b> (the woman's daughter), so use <b>whose</b> + noun. 'Who' would need a verb directly after it."],
+["Vocabulary","Verbs: meaning","The company decided to ___ the launch until next spring.",["postpone","prevent","preserve","propose"],0,"<b>Postpone</b> = move to a later time (synonym: delay, put off). Prevent = stop from happening, preserve = keep safe, propose = suggest. All start with 'p', so train yourself to check meaning, not shape."],
+["Vocabulary","Phrasal verbs","We ran ___ of milk, so I went to the shop.",["out","off","away","down"],0,"<b>Run out of</b> = have no more of something. Run away = escape; run down = criticise or lose power. Phrasal verbs change meaning completely with the particle."],
+["Vocabulary","Collocations","He ___ a great effort to finish on time.",["did","made","took","gave"],1,"The fixed collocation is <b>make an effort</b>. Remember: make a decision / a mistake / progress, but do homework / your best / a favour."],
+["Vocabulary","Adjectives: precision","Her explanation was so ___ that nobody had any questions.",["lucid","vague","complex","hasty"],0,"<b>Lucid</b> = very clear and easy to understand. The result 'nobody had questions' tells us the explanation was clear. Vague and complex would cause questions."],
+["Reading","Main idea","What is the text mainly about?",["Neighbours who protest against noise","A village library that became a community space by opening late","Children who like reading in the evening","A chess club in a village"],1,"The main idea covers the whole text: the late opening and the change it brought. A and D are small details; C is the opposite, because adults are the new visitors. Wrong options often take one detail and present it as the main point.","passage"],
+["Reading","Specific detail","Why did Olena introduce late opening hours?",["The council asked her to","Children wanted to study at night","Many adults were busy until six and could not come earlier","Visitors wanted to play chess"],2,"Look for the cause signal: <i>'because they were busy until six'</i>. The answer is a paraphrase of this sentence. Chess is a result, not the reason."],
+["Reading","Inference","What can we conclude about the project's future?",["It will certainly continue","It has already been stopped","It is not guaranteed and depends on a review","It will be moved to the daytime"],2,"The council 'promised to review the project in September' and some neighbours complain, so the decision is still open. The text never says it will continue or end. Inference = what the text supports, not what you wish."],
+["Reading","Vocabulary in context","The word 'review' in the last sentence is closest in meaning to:",["examine again","write about a book","praise","repeat"],0,"In this context a council 'reviews' a project = <b>checks it again to decide</b>. 'Write about a book' is another meaning of review, and exactly the trap: always test the meaning in the sentence."],
+["Use of English","Word formation","The ___ of the new software saved us hours of work. (EFFECT)",["effectively","effectiveness","effective","effect"],1,"After 'The' and before 'of', we need a <b>noun</b>. 'Effective' is an adjective, 'effectively' an adverb. Note that 'effect' is a noun too, but it doesn't match the intended word (the key is effective → effectiveness)."],
+["Use of English","Sentence transformation","Choose the sentence closest in meaning: 'Although it was raining, they went hiking.'",["Despite the rain, they went hiking.","Because of the rain, they went hiking.","They went hiking, so it rained.","If it rained, they went hiking."],0,"'Although' shows contrast; <b>despite + noun</b> keeps the contrast. 'Because of' shows cause and changes the meaning."],
+["Use of English","Linking words","He studied hard; ___, he failed the exam.",["therefore","however","moreover","so that"],1,"The two ideas contrast (hard study, but failure), so use <b>however</b>. Therefore = result, moreover = addition."],
+["Use of English","Past perfect","By the time we arrived, the film ___.",["started","was starting","had already started","has started"],2,"'By the time we arrived' (past) + an earlier action: the film started <b>before</b> we arrived, so use the <b>past perfect</b>: had + past participle."],
+["Grammar","Wish + past","I wish I ___ speak French as well as you do.",["can","could","would","will"],1,"After <b>wish</b> about a present situation we use the past form: 'I wish I <b>could</b>' = I cannot, but I want to. 'Can' and 'will' never follow wish in this meaning."],
+["Grammar","Question tags","You haven't finished yet, ___?",["haven't you","have you","did you","are you"],1,"A negative statement takes a <b>positive tag</b> with the same auxiliary: haven't → <b>have you</b>. Rule: positive + negative tag, negative + positive tag."],
+["Grammar","Comparatives","This exam was ___ than I expected.",["more easy","easier","most easy","the easiest"],1,"Short adjectives (easy, big, cheap) add <b>-er</b> (y → i: easier). 'Than' signals a comparative, so superlatives (C, D) are impossible."],
+["Grammar","Past simple vs continuous","When the phone rang, I ___ a shower.",["took","was taking","have taken","am taking"],1,"A longer action in progress (<b>past continuous</b>) is interrupted by a short action (<b>past simple</b>: rang). So: was taking."],
+["Vocabulary","Phrasal verbs","The teacher asked us to ___ our homework on Friday.",["hand in","hand out","put in","take in"],0,"<b>Hand in</b> = give work to a teacher. Hand out = distribute to others (the teacher does this). Check who does the action."],
+["Vocabulary","Feelings","She was ___ with the result, so she smiled all day.",["delighted","disappointed","anxious","furious"],0,"The clue is 'smiled all day': a very happy feeling. <b>Delighted</b> = very pleased. The other three are negative."],
+["Vocabulary","Collocations","He ___ a photo of the old castle.",["did","made","took","put"],2,"The collocation is <b>take a photo / picture</b>. Do not translate word by word: Ukrainian 'зробити' becomes make, do or take depending on the noun."],
+["Reading","Detail","Why was Maria afraid at first?",["Her grandfather shouted at her","She had to stand close to the hives","She lost the protective hat","She disliked honey"],1,"The text says that at ten she was allowed to <i>stand close to the hives</i> and was terrified. The fear is linked to the bees, not to her grandfather or the hat.","p2"],
+["Reading","Attitude","What does the last sentence suggest about the grandfather?",["He is angry that Maria changed things","He jokes, but still cares about the apiary","He wants to sell the apiary","He dislikes honey"],1,"He says he comes only for honey, but he visits <b>every Sunday</b>. This humour hides his interest. Read the attitude behind words (tone), not only the literal meaning."],
+["Reading","Not mentioned","Which of these is NOT mentioned in the text?",["Maria sells honey at a market","Maria writes a blog about bees","Maria won a beekeeping competition","Maria took over the apiary"],2,"In 'NOT mentioned' tasks check each option against the text. A, B and D are all there; <b>a competition is never mentioned</b>. Do not use outside logic."],
+["Use of English","Word formation","Her ___ to learn languages impressed everyone. (ABLE)",["able","ability","ably","unable"],1,"After 'Her' and before 'to learn' we need a <b>noun</b>: ability (able → ability). Ask first: what part of speech does the gap need?"],
+["Use of English","For / since","'The last time I saw him was two years ago.' = I haven't seen him ___ two years.",["since","for","ago","from"],1,"<b>For</b> + a period of time (two years); <b>since</b> + a point in time (2022, Monday). 'Ago' is used with the past simple, not with the present perfect."]
+];
+const ORD=["Grammar","Vocabulary","Reading","Use of English"];Q.sort((a,b)=>ORD.indexOf(a[0])-ORD.indexOf(b[0]));
+const HW=[
+["Grammar","Conditionals","If she ___ (know) the answer, she would tell us.",["knew"]],
+["Grammar","Passive voice","The letter ___ (write) yesterday.",["was written"]],
+["Grammar","Gerund/infinitive","He denied ___ (break) the window.",["breaking"]],
+["Vocabulary","Phrasal verbs","We need to c___ up with a better plan. (one word)",["come"]],
+["Vocabulary","Prepositions","She is afraid ___ spiders.",["of"]],
+["Vocabulary","make / do","I have to ___ the dishes. (make or do)",["do"]],
+["Reading","Paraphrase","The report says prices 'soared'. Did prices rise or fall?",["rise","rose","rise.","rose."]],
+["Reading","Paraphrase","'Few people attended.' Were there many people, yes or no?",["no"]],
+["Reading","Contrast words","'Despite the cold, thousands came.' Did the cold stop them? (yes/no)",["no"]],
+["Use of English","Word formation","She is a very ___ person. (CREATE)",["creative"]],
+["Use of English","Since / for","I haven't seen him ___ Monday. (since/for)",["since"]],
+["Use of English","Inversion","Hardly had we left ___ it started to rain. (when/than)",["when"]]
+];
+const TIPS={Grammar:"Make a one-page table of structures (conditionals, passive, reported speech) with one example each. Rewrite 5 sentences a day in a different structure.",Vocabulary:"Learn words in chunks (collocations, phrasal verbs), not alone. Keep 10 new chunks a day on cards and repeat them after 1, 3 and 7 days.",Reading:"Underline the question keyword in the text first, then the sentence that answers it. Practise paraphrasing: the answer is rarely in the same words.",
+"Use of English":"Practise word formation by learning families (create, creative, creation, creator) and always decide the part of speech before choosing."};
+const $=s=>document.querySelector(s),ans={};let end=null,tick=null,done=false;
+const qs=$("#qs");
+Q.forEach((q,i)=>{
+ if(q[6]){let e=i;while(Q[e+1]&&!Q[e+1][6]&&Q[e+1][0]==="Reading")e++;qs.insertAdjacentHTML("beforeend",`<div class="passage"><b>Read the text (questions ${i+1}–${e+1})</b><p>${q[6]==="p2"?P2:P}</p></div>`)}
+ qs.insertAdjacentHTML("beforeend",`<div class="card" id="q${i+1}"><h3>${q[0]}</h3><p><b>${i+1}.</b> ${q[2]}</p>${q[3].map((o,j)=>`<label class="o"><input type="radio" name="q${i}" value="${j}"> ${"ABCD"[j]}. ${o}</label>`).join("")}</div>`);
+});
+$("#qnav").innerHTML=Q.map((_,i)=>`<a href="#q${i+1}" id="n${i}">${i+1}</a>`).join("");
+qs.addEventListener("change",e=>{
+ if(done)return;start();
+ const i=+e.target.name.slice(1);ans[i]=+e.target.value;
+ $("#n"+i).classList.add("done");
+ e.target.closest(".card").querySelectorAll("label").forEach(l=>l.classList.toggle("sel",l.contains(e.target)));
+});
+function start(){if(end)return;end=Date.now()+3600000;tick=setInterval(draw,500);draw();$("#start").disabled=true}
+function draw(){
+ const s=Math.max(0,Math.round((end-Date.now())/1000));
+ const t=$("#timer");t.textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+ t.classList.toggle("low",s<300);
+ if(s===0&&!done)finish(true);
+}
+$("#start").onclick=start;
+$("#finish").onclick=()=>{
+ const left=Q.length-Object.keys(ans).length;
+ if(left&&!confirm(left+" question(s) unanswered. Finish anyway?"))return;
+ finish();
+};
+function show(id){
+ document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===id));
+ document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===id));
+ window.scrollTo(0,0);
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>show(b.dataset.t));
+let used="";
+function finish(auto){
+ done=true;clearInterval(tick);
+ if(end){const sp=Math.round((3600000-Math.max(0,end-Date.now()))/60000);used=sp+" min used"}else used="timer not started";
+ document.querySelectorAll("#qs input").forEach(i=>i.disabled=true);
+ $("#tr").disabled=false;$("#th").disabled=false;
+ buildReview();buildHW();show("review");
+}
+const cats=["Grammar","Vocabulary","Reading","Use of English"];
+function stats(){
+ const r={};cats.forEach(c=>r[c]={ok:0,n:0,miss:[]});
+ Q.forEach((q,i)=>{const s=r[q[0]];s.n++;if(ans[i]===q[4])s.ok++;else s.miss.push(q[1])});
+ return r;
+}
+function buildReview(){
+ const st=stats(),tot=Object.values(st).reduce((a,s)=>a+s.ok,0),pct=Math.round(tot/Q.length*100);
+ let h=`<div class="score"><div><b>${tot}/${Q.length}</b>correct (${pct}%)</div><div><b>${used.split(" ")[0]}</b>${used.includes("min")?"minutes":used}</div>${cats.map(c=>`<div><b>${st[c].ok}/${st[c].n}</b>${c}<div class="bar"><i style="width:${st[c].ok/st[c].n*100}%"></i></div></div>`).join("")}</div>`;
+ h+=Q.map((q,i)=>{
+  const ok=ans[i]===q[4],y=ans[i]===undefined?"No answer":`${"ABCD"[ans[i]]}. ${q[3][ans[i]]}`;
+  return `<div class="card rv ${ok?"":"wrong"}"><span class="tag">${q[0]}</span><span class="tag">${q[1]}</span><p><b>${i+1}.</b> ${q[2]}</p>
+  <div class="yours ${ok?"g":"b"}">Your answer: ${y} ${ok?"✓":"✗"}</div>${ok?"":`<div class="yours g">Correct: ${"ABCD"[q[4]]}. ${q[3][q[4]]}</div>`}
+  <div class="exp">${q[5]}</div></div>`}).join("");
+ h+=`<button class="btn" onclick="show('hw')">Go to homework</button>`;
+ $("#review").innerHTML=h;
+}
+function buildHW(){
+ const st=stats();
+ const rows=cats.map(c=>{const p=Math.round(st[c].ok/st[c].n*100);
+  const lvl=p>=80?"Strong":p>=60?"Review":"Priority";
+  return `<tr><td>${c}</td><td>${st[c].ok}/${st[c].n} (${p}%)</td><td>${lvl}</td><td>${st[c].miss.join(", ")||"none"}</td></tr>`}).join("");
+ const weak=cats.slice().sort((a,b)=>st[a].ok/st[a].n-st[b].ok/st[b].n).filter(c=>st[c].ok<st[c].n).slice(0,2);
+ let h=`<div class="card"><h3>Your error analysis</h3><div class="scroll"><table><tr><th>Section</th><th>Score</th><th>Status</th><th>Topics missed</th></tr>${rows}${spkRow()}</table></div></div>`;
+ h+=`<div class="card"><h3>What to work on first</h3>${weak.length?weak.map(c=>`<p><b>${c}:</b> ${TIPS[c]}</p>`).join(""):"<p>No errors. Next step: repeat the test under a 45-minute limit.</p>"}${spkTip()}</div>`;
+ h+=`<div class="card"><h3>Homework sample (12 short tasks, type the answer)</h3><p>Do the tasks in your weakest section first. Then press Check.</p>`+
+ cats.map(c=>`<p><b>${c}</b></p>`+HW.map((x,i)=>x[0]===c?`<p>${x[2]} <input class="t" id="h${i}" autocomplete="off"><span class="fb" id="f${i}"></span></p>`:"").join("")).join("")+
+ `<button class="btn" id="chk">Check homework</button> <span id="hs" style="margin-left:10px"></span></div>`+
+ `<div class="card"><h3>Self-check after homework</h3><p>For every error write in your notebook: (1) the rule, (2) why you chose the wrong answer (didn't know / hurried / misread), (3) one new example sentence. Retake the test in a week and compare the section table above.</p></div>`;
+ $("#hw").innerHTML=h;
+ $("#chk").onclick=()=>{let n=0;HW.forEach((x,i)=>{const v=$("#h"+i).value.trim().toLowerCase();const ok=x[3].includes(v);if(ok)n++;
+  const f=$("#f"+i);f.textContent=ok?"✓":"✗ "+x[3][0];f.style.color=ok?"var(--ok)":"var(--bad)"});
+  $("#hs").textContent=n+"/"+HW.length+" correct"};
+}
+const CR=["Fluency","Grammar accuracy","Vocabulary range","Organisation of ideas"],spk=[];
+$("#rate").innerHTML=CR.map((c,i)=>`<p>${c}: <select id="r${i}"><option value="">-</option>${[1,2,3,4,5].map(n=>`<option>${n}</option>`).join("")}</select></p>`).join("");
+let sEnd=null,sT=null;const PH=[[0,60],[60,180],[180,300]];
+$("#sgo").onclick=()=>{if(sEnd)return;sEnd=Date.now()+300000;sT=setInterval(sd,250);sd();$("#sgo").disabled=true};
+function sd(){const el=Math.round((300000-(sEnd-Date.now()))/1000),l=Math.max(0,300-el);
+ $("#stime").textContent=l?Math.floor(l/60)+":"+String(l%60).padStart(2,"0"):"Time is up";
+ PH.forEach((p,i)=>$("#ph"+(i+1)).classList.toggle("on",el>=p[0]&&el<p[1]));
+ if(l===0)clearInterval(sT)}
+$("#ssave").onclick=()=>{CR.forEach((c,i)=>spk[i]=+$("#r"+i).value||0);show("test")};
+function spkAvg(){return spk.length&&spk.every(v=>v)?spk.reduce((a,b)=>a+b,0)/spk.length:null}
+function spkRow(){const a=spkAvg();if(a===null)return '<tr><td>Speaking</td><td colspan="3">not rated</td></tr>';
+ const low=CR[spk.indexOf(Math.min(...spk))];return `<tr><td>Speaking</td><td>${a.toFixed(1)}/5</td><td>${a>=4?"Strong":a>=3?"Review":"Priority"}</td><td>weakest: ${low}</td></tr>`}
+function spkTip(){const a=spkAvg();if(a===null||a>=4)return "";
+ return `<p><b>Speaking:</b> record yourself for 2 minutes on one topic every other day, listen once and fix only one point: ${CR[spk.indexOf(Math.min(...spk))].toLowerCase()}. Give one example for each idea and use linkers (firstly, however, for instance).</p>`}
+</script>
+</body>
+</html>
